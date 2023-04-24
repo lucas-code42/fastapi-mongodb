@@ -4,7 +4,7 @@ from api.api_settings import api_settings
 
 
 async def mongo_connect_client() -> MongoClient:
-    client = pymongo.MongoClient(host="localhost", port=api_settings.DB_PORT)
+    client = pymongo.MongoClient(host=api_settings.DB_HOST)
     try:
         yield client
     finally:
