@@ -22,7 +22,7 @@ async def create(user: User, mongo_client: MongoClient=Depends(mongo_connect_cli
         print(e)
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="user doesen't match"
+            detail="data doesn't match"
         )
     finally:
         mongo_client.close()
