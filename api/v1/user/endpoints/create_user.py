@@ -15,8 +15,8 @@ router = APIRouter()
 async def create(user: User, mongo_client: MongoClient=Depends(mongo_connect_client)):
     try:
         user.id = str(uuid4())
-        db = mongo_client.test # set database
-        collection = db.users # set collection
+        db = mongo_client.test # set database or mongo_client["test"]
+        collection = db.users # set collection or db["users"]
         collection.insert_one(RawBSONDocument(encode(user.dict()))) # set dict to bson
     except Exception as e:
         print(e)
@@ -26,4 +26,5 @@ async def create(user: User, mongo_client: MongoClient=Depends(mongo_connect_cli
         )
     finally:
         mongo_client.close()
+    
     return user
